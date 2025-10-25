@@ -4,7 +4,7 @@
 // Configuration - Easy to modify for the client
 const CONFIG = {
     // Change this email address to your actual email
-    ownerEmail: 'mondalz493@gmail.com',
+    ownerEmail: 'nicetarafdar3@gmail.com',
     
     // Change this URL to your actual QR code image (relative path supported)
     qrCodeUrl: './WhatsApp Image 2025-10-20 at 23.26.36_45cc7e19.jpg',
@@ -332,11 +332,8 @@ Please process this order within 24 hours.
 ---
 This order was placed through ${CONFIG.businessName} website.`;
 
-        // Create mailto link with customer email as sender and both owner emails as recipients
-        // Note: The 'from' parameter in mailto doesn't work in all email clients
-        // The customer's email will be used in the body, and they can manually set their email as sender
-        const recipients = `${CONFIG.ownerEmail},nicetarafdar3@gmail.com`;
-        const mailtoLink = `mailto:${recipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        // Create mailto link with owner email as recipient
+        const mailtoLink = `mailto:${CONFIG.ownerEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         
         // Open email client
         window.location.href = mailtoLink;
@@ -542,3 +539,31 @@ document.addEventListener('DOMContentLoaded', function() {
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = { ShoppingCart, Utils, CONFIG };
 }
+
+// Banner Management - Permanent Banner
+class BannerManager {
+    constructor() {
+        this.banner = document.getElementById('offerBanner');
+        this.init();
+    }
+
+    init() {
+        // Show banner immediately when page loads
+        this.showBanner();
+    }
+
+    showBanner() {
+        if (this.banner) {
+            this.banner.classList.remove('-translate-y-full');
+            this.banner.classList.add('translate-y-0');
+            
+            // Add body padding to prevent content jump
+            document.body.style.paddingTop = this.banner.offsetHeight + 'px';
+        }
+    }
+}
+
+// Initialize banner when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    new BannerManager();
+});
