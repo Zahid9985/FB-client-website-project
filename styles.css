@@ -1,0 +1,431 @@
+/* Custom CSS for FameBoost E-commerce Website */
+
+/* Additional custom styles to complement Tailwind CSS */
+
+/* Animated, interactive-feel gradient background (non-intrusive) */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background: radial-gradient(1200px 800px at 10% 10%, rgba(59,130,246,0.12), transparent 60%),
+                radial-gradient(1000px 700px at 90% 20%, rgba(16,185,129,0.12), transparent 60%),
+                radial-gradient(900px 700px at 20% 90%, rgba(236,72,153,0.10), transparent 60%),
+                linear-gradient(120deg, #f8fafc 0%, #f1f5f9 50%, #f8fafc 100%);
+    background-size: 200% 200%, 200% 200%, 200% 200%, 200% 200%;
+    animation: bgFloat 26s ease-in-out infinite;
+}
+
+@keyframes bgFloat {
+    0% { background-position: 0% 50%, 100% 50%, 0% 100%, 0% 50%; }
+    50% { background-position: 100% 50%, 0% 50%, 100% 0%, 100% 50%; }
+    100% { background-position: 0% 50%, 100% 50%, 0% 100%, 0% 50%; }
+}
+.product-card {
+    transition: transform 0.2s ease-in-out;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-2px);
+}
+
+/* Ensure product card content stretches uniformly */
+.product-card > h3 {
+    min-height: 2.75rem; /* reserve space for up to 2 lines of title */
+}
+
+.product-card .space-y-3,
+.product-card .space-y-4 {
+    flex: 1 1 auto;
+}
+
+/* Custom scrollbar for modal */
+#paymentModal .bg-white {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e0 #f7fafc;
+}
+
+#paymentModal .bg-white::-webkit-scrollbar {
+    width: 6px;
+}
+
+#paymentModal .bg-white::-webkit-scrollbar-track {
+    background: #f7fafc;
+    border-radius: 3px;
+}
+
+#paymentModal .bg-white::-webkit-scrollbar-thumb {
+    background: #cbd5e0;
+    border-radius: 3px;
+}
+
+#paymentModal .bg-white::-webkit-scrollbar-thumb:hover {
+    background: #a0aec0;
+}
+
+/* Animation for cart count badge */
+#cartCount {
+    animation: pulse 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Success message animation */
+#successMessage {
+    animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Modal backdrop animation */
+#paymentModal {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Modal content animation */
+#paymentModal .bg-white {
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Button hover effects */
+.add-to-cart, .buy-now, #checkoutButton, #orderForm button {
+    position: relative;
+    overflow: hidden;
+}
+
+.add-to-cart::before, .buy-now::before, #checkoutButton::before, #orderForm button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.add-to-cart:hover::before, .buy-now:hover::before, #checkoutButton:hover::before, #orderForm button:hover::before {
+    left: 100%;
+}
+
+/* Form input focus effects */
+input[type="url"], input[type="text"] {
+    transition: all 0.3s ease;
+}
+
+input[type="url"]:focus, input[type="text"]:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Cart item animation */
+.cart-item {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading state for buttons */
+.loading {
+    position: relative;
+    color: transparent;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #ffffff;
+    border-top: 2px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .product-card {
+        margin-bottom: 1rem;
+    }
+    
+    #paymentModal .bg-white {
+        margin: 1rem;
+        max-height: calc(100vh - 2rem);
+    }
+    
+    .text-4xl {
+        font-size: 2rem;
+    }
+    
+    .text-xl {
+        font-size: 1.125rem;
+    }
+}
+
+/* Print styles */
+@media print {
+    #paymentModal, #successMessage, #cartButton {
+        display: none !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .product-card {
+        border: 2px solid #000;
+    }
+    
+    .bg-blue-600 {
+        background-color: #0000ff !important;
+    }
+    
+    .text-blue-600 {
+        color: #0000ff !important;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Diwali Offer Banner Styles - Enhanced Animations */
+#offerBanner {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    border-bottom: 3px solid #fbbf24;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Animated background gradient */
+#offerBanner .bg-gradient-to-r {
+    background: linear-gradient(45deg, #f97316, #dc2626, #eab308, #f97316, #dc2626, #f97316);
+    background-size: 400% 400%;
+    animation: gradientShift 4s ease-in-out infinite;
+    position: relative;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 100% 50%; }
+    50% { background-position: 50% 100%; }
+    75% { background-position: 0% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Floating particles effect */
+#offerBanner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes shimmer {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+/* Enhanced title animation */
+#offerBanner h2 {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ffffff, #fef3c7, #ffffff, #fbbf24, #ffffff);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textShimmer 3s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+    transform: scale(1);
+    transition: transform 0.3s ease;
+}
+
+#offerBanner h2:hover {
+    transform: scale(1.05);
+}
+
+@keyframes textShimmer {
+    0% { 
+        background-position: 0% 50%;
+        transform: scale(1);
+    }
+    25% { 
+        background-position: 100% 50%;
+        transform: scale(1.02);
+    }
+    50% { 
+        background-position: 50% 100%;
+        transform: scale(1);
+    }
+    75% { 
+        background-position: 0% 50%;
+        transform: scale(1.02);
+    }
+    100% { 
+        background-position: 0% 50%;
+        transform: scale(1);
+    }
+}
+
+/* Enhanced subtitle animation */
+#offerBanner p {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    position: relative;
+    z-index: 2;
+    animation: gentleBounce 2s ease-in-out infinite;
+}
+
+@keyframes gentleBounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-2px); }
+}
+
+/* Firework emojis animation */
+#offerBanner .flex.items-center.space-x-2 span {
+    display: inline-block;
+    animation: fireworkFloat 2s ease-in-out infinite;
+    position: relative;
+    z-index: 2;
+}
+
+#offerBanner .flex.items-center.space-x-2 span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+#offerBanner .flex.items-center.space-x-2 span:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+#offerBanner .flex.items-center.space-x-2 span:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes fireworkFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1);
+    }
+    25% { 
+        transform: translateY(-3px) rotate(5deg) scale(1.1);
+    }
+    50% { 
+        transform: translateY(-5px) rotate(0deg) scale(1.2);
+    }
+    75% { 
+        transform: translateY(-3px) rotate(-5deg) scale(1.1);
+    }
+}
+
+/* Subtle glow effect around banner */
+#offerBanner::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, #f97316, #dc2626, #eab308, #f97316);
+    background-size: 400% 400%;
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0.3;
+    animation: gradientShift 4s ease-in-out infinite;
+    filter: blur(3px);
+}
+
+/* Hover effect for entire banner */
+#offerBanner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+#offerBanner:hover::after {
+    opacity: 0.5;
+    filter: blur(5px);
+}
+
+
+/* Responsive adjustments for banner */
+@media (max-width: 768px) {
+    #offerBanner .flex.items-center.justify-center {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    #offerBanner .flex.items-center.space-x-2 {
+        display: none;
+    }
+}
